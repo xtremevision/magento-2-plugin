@@ -44,12 +44,13 @@ class SamedayModal extends Template
         }
 
         $order = $this->getOrder();
+		$serviceId = explode('_', $order->getShippingMethod(), 2);
 
         return [
             'client_reference' => $order->getId(),
             'weight' => $order->getWight(),
             'repayment' => $order->getGrandTotal(),
-            'serviceId' => explode('_', $order->getShippingMethod(), 2)[1],
+            'serviceId' => isset($serviceId[1]) ? $serviceId[1] : null,
         ];
     }
 
